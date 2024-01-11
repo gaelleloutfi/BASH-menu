@@ -1,0 +1,5 @@
+Brown, Rachel, 912345678
+GPA: 3.6
+Major: Computer Sciences
+Advisor: Dr. Johnson
+Address: Lebanon, Beirut, Hamra

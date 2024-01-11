@@ -1,0 +1,5 @@
+Smith, John, 837596214
+GPA: 3.9
+Major: Computer Sciences
+Advisor: Dr. Brown
+Address: Lebanon, Tripoli, Al-Zahrieh Street

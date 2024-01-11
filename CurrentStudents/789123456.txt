@@ -1,0 +1,5 @@
+Chen, Mei, 789123456
+GPA: 3.9
+Major: Computer Sciences
+Advisor: Dr. Lee
+Address: Lebanon, Beirut, Achrafieh

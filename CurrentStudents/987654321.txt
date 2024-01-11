@@ -1,0 +1,5 @@
+Rodriguez, Maria, 987654321
+GPA: 3.8
+Major: Mathematics
+Advisor: Dr. Garcia
+Address: Lebanon, Tripoli, Al-Mina Street

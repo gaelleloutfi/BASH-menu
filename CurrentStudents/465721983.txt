@@ -1,0 +1,5 @@
+Johnson, Maria, 465721983
+GPA: 3.6
+Major: Bioinformatics
+Advisor: Dr. Johnson
+Address: Lebanon, Beirut, Verdun Street

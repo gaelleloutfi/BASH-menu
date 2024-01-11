@@ -1,0 +1,5 @@
+Davis, Sarah, 514738926
+GPA: 3.2
+Major: Bioinformatics
+Advisor: Dr. Brown
+Address: Lebanon, Tripoli, Al-Mina Street

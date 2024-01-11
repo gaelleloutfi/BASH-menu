@@ -1,0 +1,5 @@
+Kim, Tae-Joon, 202267891
+GPA: 3.4
+Major: Bioinformatics
+Advisor: Dr. Lee
+Address: Lebanon, Beirut, Gemmayze

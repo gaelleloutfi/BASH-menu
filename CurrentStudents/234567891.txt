@@ -1,0 +1,5 @@
+Garcia, Jose, 234567891
+GPA: 3.6
+Major: Mathematics
+Advisor: Dr. Rodriguez
+Address: Lebanon, Sidon, Old Souk

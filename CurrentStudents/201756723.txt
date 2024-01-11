@@ -1,0 +1,5 @@
+Garcia, Juan, 201756723
+GPA: 3.3
+Major: Bioinformatics
+Advisor: Dr. Hernandez
+Address: Lebanon, Beirut, Ain El Mreisseh

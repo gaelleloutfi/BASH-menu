@@ -1,0 +1,5 @@
+Gonzalez, Antonio, 678912345
+GPA: 3.8
+Major: Bioinformatics
+Advisor: Dr. Garcia
+Address: Lebanon, Zahle, Al-Kanater Street

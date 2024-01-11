@@ -1,0 +1,5 @@
+Kim, Min-Jae, 567891234
+GPA: 3.7
+Major: Bioinformatics
+Advisor: Dr. Park
+Address: Lebanon, Beirut, Hamra

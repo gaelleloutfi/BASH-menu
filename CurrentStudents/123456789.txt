@@ -1,0 +1,5 @@
+Smith, John, 123456789
+GPA: 3.5
+Major: Computer Sciences
+Advisor: Dr. Johnson
+Address: Lebanon, Beirut, Bliss Street

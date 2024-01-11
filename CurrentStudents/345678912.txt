@@ -1,0 +1,5 @@
+Patel, Devika, 345678912
+GPA: 3.4
+Major: Mathematics
+Advisor: Dr. Park
+Address: Lebanon, Beirut, Ras Beirut

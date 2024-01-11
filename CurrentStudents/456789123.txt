@@ -1,0 +1,5 @@
+Nguyen, David, 456789123
+GPA: 3.2
+Major: Bioinformatics
+Advisor: Dr. Tran
+Address: Lebanon, Jounieh, Maameltein

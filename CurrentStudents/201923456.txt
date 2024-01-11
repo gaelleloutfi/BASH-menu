@@ -1,0 +1,5 @@
+Ali, Fatima, 201923456
+GPA: 3.2
+Major: Bioinformatics
+Advisor: Dr. Garcia
+Address: Lebanon, Beirut, Mar Mikhael

@@ -1,0 +1,5 @@
+Martinez, Sofia, 201891234
+GPA: 3.5
+Major: Computer Sciences
+Advisor: Dr. Rodriguez
+Address: Lebanon, Beirut, Corniche El Nahr

@@ -1,0 +1,5 @@
+Lee, David, 342198765
+GPA: 3.4
+Major: Computer Sciences
+Advisor: Dr. Johnson
+Address: Lebanon, Beirut, Bliss Street
