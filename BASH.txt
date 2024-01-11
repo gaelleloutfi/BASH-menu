@@ -1,0 +1,314 @@
+#!/bin/sh
+
+# Gaelle Loutfi 
+
+#Please note that for this scrit to work properly, a copy of the "CurrentStudent" file should be present in the home directory.
+
+#Introduction to the Directory
+
+echo "Student Database: Computer Sicence and Mathematics Department"
+
+echo "The Majors currently offered are: Bioinformatics - Computer Science - Mathematics"
+
+for f in CurrentStudents/*.txt
+        #Loop over all .txt files in the CurrentStudents directory
+do
+
+        dos2unix -i "$f" >unnecessary.txt
+
+                #Convert each file to Unix format in place (-i option)
+                #Redirect the command output to unnecessary.txt
+
+        rm unnecessary.txt
+
+                #Remove the unnecessary.txt file to clean up
+
+done
+        #Loop is over.
+x=0
+
+                #This line sets a variable x=0. x will be used to represent the number of times the user tries to give an invalid input
+
+                #An input that does not correspond to any of the options provided
+
+while [ $x -le 3 ]
+
+                #If the user choses an invalid option more than 3 times, the program will terminate and the menu will be exited
+do
+
+                 #Presenting the menu with the available options:
+
+        echo "Please enter the number corresponding to the option you wish to choose: "
+
+        echo "1. List All"
+
+        echo "2. Display Info"
+
+        echo "3. Count Students"
+
+        echo "4. Delete Student"
+
+        echo "5. Backup"
+
+        echo "6. Exit/Quit"
+
+        read option
+
+                #Taking an input from the user. If the user choses a valid option, the option he choses will be executed.
+
+        case "$option" in
+
+                1)
+
+                echo "You chose to list the Surname, First Name, and Student ID of all Students: The result will be displayed in alphabetical order based on the Surname of each Student"
+                for stdfile in CurrentStudents/*.txt
+
+                        #This lin takes all files with .txt extension in the folder CurrentStudents
+
+                do
+
+                line_needed=$(head -n 1 "$stdfile")
+
+                        #This line stores the first line of each file in a variable called line_needed
+
+                echo "$line_needed" >> listing.txt
+
+                        #This line appends the first line of each student file to a new file called listing.txt as it keeps looping through all the files in the directory
+
+                done
+
+                        #The for loop is over
+
+                sort listing.txt
+
+                        #the file will be sorted by alphabetical order of the surname by default as it is the first word of each line. The sorted version will automatically be displayed
+
+                rm listing.txt
+
+                        #In order to be able to reuse the option and other options that have to loop through all the .txt files in the directory
+                        #We have to delete this one; otherwise it will be considered in the output and will mess it up.
+
+                ;;
+                2)
+                echo "You chose to display the Student ID, Major and GPA of all students: "
+
+
+
+                echo "StudentID  GPA Major"
+
+                        #This line writes the header row for the table of student information.
+
+            for file in CurrentStudents/*.txt
+
+                        #This line initializes a loop that iterates through all the ".txt"files in the directory
+                do
+
+                student_id=$(basename "$file" .txt)
+
+                        #This line extracts the filename of the student's file., which is assumed to be the student's ID, and saves it to a variable named "student_id"
+                        #Basename is a Unix command that returns the filename component of a path. In this case, it is being used to extract the student ID from the filename of the current student file.
+                        #The expression $(basename "$file" .txt) first passes the $file variable to basename as the argument, and then specifies the .txt extension to be removed from the filename.
+                        #So, if $file is  currently at this iteration is 12345.txt, then basename "$file" .txt would return 12345, which is saved to the student_id variable).
+
+                student_info=$(cat "$file"| grep -v "Address")
+
+                        #This line reads the contents of the current student's file, removes any lines that contain the word "Address", and saves the result to a variable named student_address
+
+                student_major=$(echo "$student_info"| grep "Major"| cut -d':' -f2|tr -d ' ')
+
+                        #This command extracts the value of the Major field from the student_info variable, which contains all of the student's information except for their address. The command first pipes the contents of the student_info variable to the grep command to search for the line that contains the word "Major". The output of grep is then piped to the cut command, which extracts the second field from the line using : as the delimiter. The -f2 option specifies that the second field should be extracted. Finally, the output of cut is piped to the tr command, which removes any leading or trailing spaces from the extracted field. The resulting value is saved to the student_major variable.
+                        #For example, if student_info contains the line Major: Computer Science, then student_major would be set to Computer Science).
+
+                student_gpa=$(echo "$student_info"| grep "GPA"| cut -d':' -f2)
+
+                        #This command extracts the value of the GPA field from the student_info variable, which contains all of the student's information except for their address.
+                        #The command first pipes the contents of the student_info variable to the grep command to search for the line that contains the word "GPA". The output of grep is then piped to the cut command, which extracts the second field from the line using : as the delimiter. The -f2 option specifies that the second field should be extracted. Finally, the output of cut is piped to the tr command, which removes any leading or trailing spaces from the extracted field. The resulting value is saved to the student_gpa variable.
+                        #For example, if student_info contains the line GPA: 3.8, then student gpa would be set to 3.8.)
+                        #These two lines extract the values for the Major and GPA fields from the student_info variable and save them to student_major and student_gpa variables respectively.
+
+                echo "$student_id $student_gpa $student_major"
+
+                        #This line appends the student ID, major, and GPA values separated by tabs.
+
+                done
+
+                        #This line declares that the loop is over
+
+
+
+
+                ;;
+
+                3)
+
+                echo "\nThe number of Students per major, in reversse numerical number: "
+
+                bif_count=0
+                        #This line initializes the bioinformatics count
+                cs_count=0
+                        #This line initializes the computer sciences count
+                mth_count=0
+                        #This line initializes the mathematics count
+                uc=0
+                        #This line initializes the unrelated majors count
+
+                for file in CurrentStudents/*.txt
+
+                        #This line loops over the all the text files in the CurrentStudents Directory
+
+                do
+
+                if grep -q "Major: Bioinformatics" "$file"
+
+                        #Using a regular expression, this command searches for the string "Major: Bioinformatics" in the specified file
+
+                      then    bif_count=$((bif_count +1))
+
+                        #If the regex was matched, it increments the bioinformatics count
+
+                elif grep -q  "Major: Computer Sciences" "$file"
+
+                        #Using a regular expression, this command searches for the string "Major: Computer Sciences" in the specified file
+
+                then cs_count=$((cs_count +1))
+
+                        #If the regex was matched, it increments the computer science count
+
+                elif grep -q "Major: Mathematics" "$file"
+
+                        #Using a regular expression, this command searches for the string "Major: Mathematics" in the specified file
+
+                then    mth_count=$((mth_count +1))
+
+                        #If the regex was matched, it increments the mathematics count
+
+                else
+
+                uc=$((uc+1))
+
+                        #If an unrelated major was matched, it increments the unrelated major count
+                fi
+                        #If else statement is over
+                done
+                        #Loop is over
+
+                echo "Number of students per major:"
+
+                echo "Mathematics: $mth_count \nComputer Sciences: $cs_count \nBioinformatics: $bif_count \nUnrelated Majors: $uc\n" | sort -n
+                        #printing the counts in descending order (reverse numerical order using the sort command)
+                ;;
+
+                4)
+                echo "Please enter the ID of the Student you wish to delete: "
+
+                        #This line prompts the user to enter the ID of the student whose file they wish to remove
+
+                cd CurrentStudents
+
+                while true;
+
+                        #This while loop is necessary in order to keep asking for an ID until the user enters a valid one
+
+                do
+
+                read stdID
+
+                        #Reading the input from the user and storing it in a variable called stdID
+
+                if echo "$stdID" | grep -qE '^[0-9]{9}$';
+
+                        #Used grep to check if the input is actually a valid ID (aka a 9-digit number) by matching it to the corresponding regular expression
+                        #We used ^ and $ to match the whole number and not a subnumber but we could have also used -w
+                        #-q stands for quiet mode, this means it does not return any standard output, but will just give a match/no match (true/false in this case)
+                        #-E enables the use of extended regular expressions
+                then
+
+                if [ ! -f "$stdID.txt" ];
+
+                        #If the ID format is valid but there is no file that corresponds to that ID
+
+                then
+
+                echo "Student with ID "$stdID" was not found"
+
+                break
+
+                        #This line this will exit out of the option
+
+                else
+
+                rm "$stdID.txt"
+
+                        #If the ID format is valid and the file exists, it will be removed/deleted
+
+                echo "$stdID.txt has been Deleted"
+
+                break
+
+                        #The job is done, this will break out of the option
+
+                fi
+
+                else
+
+                echo "This ID format is not valid, Please enter a valid 9-digit ID format"
+
+                        #There is no break, this way the user will keep on being promted to enter an ID until he enters a valid ID format
+                        #Even if there is no file corresponding to it in the folder
+                fi
+
+                done
+                cd ..
+                ;;
+
+                5)
+
+                backup_folder="CurrentStudents.$(date +%d_%B_%y)"
+
+                        #Define the name of the backup folder based on the current date.
+
+                mkdir "$backup_folder"
+
+                        #Create the backup folder.
+
+                cp CurrentStudents/*.txt "$backup_folder/"
+
+                        #Copy all .txt files from the CurrentStudents directory to the backup folder.
+
+                echo "Backup was successful"
+
+                ;;
+
+                6)
+
+                echo "Exiting the menu..."
+
+                sleep 3 #sleep is not necessary but it makes it look better (personnal preference)
+
+                exit 0 #exiting the menu
+
+                ;;
+
+                *)
+
+                clear #also for personnal preference/aesthetics
+
+                x=$(( x + 1 ))
+
+                        #Incrementing x by 1 which means that this is one more try at a non valid option
+
+                y=$(( 4 - $x ))
+
+                        #This variable y keeps track of the number of tries left before the program terminates
+
+                echo "That is not a valid option. Note that you still have $y tries only before the program terminates "
+
+                sleep 3
+
+                        #Personnal preference
+
+                ;;
+
+        esac
+
+done
